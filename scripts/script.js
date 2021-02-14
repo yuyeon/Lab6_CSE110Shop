@@ -46,10 +46,10 @@ function updateProducts(products) {
             const prodIndex = addedProducts.indexOf(product.id);
             if (prodIndex != -1) {
                 addedProducts.splice(prodIndex, 1);
-                button.innerHTML = "Add to Cart";
+                button.innerHTML = ADD_CART_TEXT;
             } else {
                 addedProducts.push(product.id);
-                button.innerHTML = "Remove from Cart";
+                button.innerHTML = REMOVE_CART_TEXT;
             }
             cartCount.innerHTML = addedProducts.length;
             myStorage.setItem('added-products', JSON.stringify(addedProducts));
