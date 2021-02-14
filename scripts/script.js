@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const productsStr = myStorage.getItem('products');
     if (productsStr === null) {
         fetch("https://fakestoreapi.com/products")
-            .then(response => response.json())
+            .then(response => response.json()) // Change into json, but still waiting for response (response.json just a promise)
             .then(data => {
                 myStorage.setItem('products', JSON.stringify(data));
                 updateProducts(data);
@@ -50,6 +50,7 @@ function updateProducts(products) {
             } else {
                 addedProducts.push(product.id);
                 button.innerHTML = REMOVE_CART_TEXT;
+                alert('Added to Cart!');
             }
             cartCount.innerHTML = addedProducts.length;
             myStorage.setItem('added-products', JSON.stringify(addedProducts));
