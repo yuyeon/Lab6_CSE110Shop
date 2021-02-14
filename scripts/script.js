@@ -27,7 +27,7 @@ function updateProducts(products) {
         console.log(product);
 
         let comp = document.createElement('product-item');
-        comp.setAttribute('iamge', product.image);
+        comp.setAttribute('image', product.image);
         comp.setAttribute('title', product.title);
         comp.setAttribute('price', product.price);
 
