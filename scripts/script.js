@@ -1,6 +1,8 @@
 // Script.js
 
 const myStorage = window.localStorage;
+const ADD_CART_TEXT = "Add to Cart";
+const REMOVE_CART_TEXT = "Remove from Cart";
 
 window.addEventListener('DOMContentLoaded', () => {
     const productsStr = myStorage.getItem('products');
@@ -24,7 +26,9 @@ function updateProducts(products) {
 
     const productList = document.getElementById('product-list');
     const cartCount = document.getElementById('cart-count');
-    const addedProducts = [];
+    const addedProducts = JSON.parse(myStorage.getItem('added-products')) || [];
+    console.log(addedProducts);
+    cartCount.innerHTML = addedProducts.length;
 
     for (let index = 0; index < products.length; index++) {
         const product = products[index];
@@ -33,7 +37,12 @@ function updateProducts(products) {
         comp.setAttribute('image', product.image);
         comp.setAttribute('title', product.title);
         comp.setAttribute('price', product.price);
-        comp.setCartCallback((button) => {
+        if (addedProducts.includes(product.id)) {
+            comp.setAttribute('btnText', REMOVE_CART_TEXT);
+        } else {
+            comp.setAttribute('btnText', ADD_CART_TEXT);
+        }
+        comp.setCartCallback(button => {
             const prodIndex = addedProducts.indexOf(product.id);
             if (prodIndex != -1) {
                 addedProducts.splice(prodIndex, 1);
@@ -43,6 +52,7 @@ function updateProducts(products) {
                 button.innerHTML = "Remove from Cart";
             }
             cartCount.innerHTML = addedProducts.length;
+            myStorage.setItem('added-products', JSON.stringify(addedProducts));
             console.log(addedProducts);
         });
 

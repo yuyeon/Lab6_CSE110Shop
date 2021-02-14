@@ -99,8 +99,7 @@ class ProductItem extends HTMLElement {
         button.addEventListener('click', () => {
             this.cartCallback(button);
         });
-        // button.setAttribute('onclick', "cartCallback()");
-        button.innerHTML = 'Add to Cart';
+        button.innerHTML = this.getAttribute('btnText');
         li.appendChild(button)
 
         shadow.append(style, li);
