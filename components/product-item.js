@@ -1,14 +1,14 @@
 // product-item.js
 
 class ProductItem extends HTMLElement {
-  // TODO
-  constructor() {
-    self = super();
+    // TODO
+    constructor() {
+        self = super();
 
-    const shadow = this.attachShadow({mode: 'open'});
+        const shadow = this.attachShadow({ mode: 'open' });
 
-    const style = document.createElement('style');
-    style.textContent = `.price {
+        const style = document.createElement('style');
+        style.textContent = `.price {
       color: green;
       font-size: 1.8em;
       font-weight: bold;
@@ -72,32 +72,32 @@ class ProductItem extends HTMLElement {
       text-overflow: unset;
     }`;
 
-    const li = document.createElement('li');
-    li.setAttribute('class', 'product');
+        const li = document.createElement('li');
+        li.setAttribute('class', 'product');
 
-    const img = document.createElement('img');
-    img.setAttribute('width', 200);
-    img.setAttribute('src', this.getAttribute('image'));
-    img.setAttribute('alt', this.getAttribute('title'));
-    li.appendChild(img);
+        const img = document.createElement('img');
+        img.setAttribute('width', 200);
+        img.setAttribute('src', this.getAttribute('image'));
+        img.setAttribute('alt', this.getAttribute('title'));
+        li.appendChild(img);
 
-    const title = document.createElement('p');
-    title.setAttribute('class', 'title');
-    title.textContent = this.getAttribute('title');
-    li.appendChild(title);
+        const title = document.createElement('p');
+        title.setAttribute('class', 'title');
+        title.textContent = this.getAttribute('title');
+        li.appendChild(title);
 
-    const price = document.createElement('p');
-    price.setAttribute('class', 'price');
-    price.textContent = this.getAttribute('price');
-    li.appendChild(price);
+        const price = document.createElement('p');
+        price.setAttribute('class', 'price');
+        price.textContent = this.getAttribute('price');
+        li.appendChild(price);
 
-    const button = document.createElement('button');
-    button.setAttribute('onclick', "alert('Added to Cart!')");
-    button.innerHTML = 'Add to Cart';
-    li.appendChild(button)
-    
-    shadow.append(style, li);
-  }
+        const button = document.createElement('button');
+        button.setAttribute('onclick', "alert('Added to Cart!')");
+        button.innerHTML = 'Add to Cart';
+        li.appendChild(button)
+
+        shadow.append(style, li);
+    }
 }
 
 customElements.define('product-item', ProductItem);

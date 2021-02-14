@@ -3,28 +3,27 @@
 let myStorage = window.localStorage;
 
 window.addEventListener('DOMContentLoaded', () => {
-    let products = myStorage.getItem('products');
-    if (products === null) {
+    let productsStr = myStorage.getItem('products');
+    if (productsStr === null) {
         fetch("https://fakestoreapi.com/products")
-            .then(response => {
-                myStorage.setItem('products', JSON.stringify(response));
-                products = JSON.parse(myStorage.getItem('products'));
-                updateProducts(products);
+            .then(response => response.json())
+            .then(data => {
+                myStorage.setItem('products', JSON.stringify(data));
+                updateProducts(data);
             })
             .catch(error => {
                 console.log("Chi is trolling me");
             });
     } else {
-        updateProducts(products);
+        updateProducts(JSON.parse(productsStr));
     }
 });
 
 function updateProducts(products) {
+    console.log(products);
     const productList = document.getElementById('product-list');
-    console.log(products)
-    for (index in products) {
+    for (let index = 0; index < products.length; index++) {
         let product = products[index];
-        console.log(product);
 
         let comp = document.createElement('product-item');
         comp.setAttribute('image', product.image);
