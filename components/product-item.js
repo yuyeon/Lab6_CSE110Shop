@@ -4,7 +4,9 @@ class ProductItem extends HTMLElement {
     // TODO
     constructor() {
         self = super();
+    }
 
+    connectedCallback() {
         const shadow = this.attachShadow({ mode: 'open' });
 
         const style = document.createElement('style');
