@@ -4,6 +4,8 @@ class ProductItem extends HTMLElement {
     // TODO
     constructor() {
         self = super();
+
+        this.cartCallback = () => undefined;
     }
 
     connectedCallback() {
@@ -94,11 +96,18 @@ class ProductItem extends HTMLElement {
         li.appendChild(price);
 
         const button = document.createElement('button');
-        button.setAttribute('onclick', "alert('Added to Cart!')");
+        button.addEventListener('click', () => {
+            this.cartCallback(button);
+        });
+        // button.setAttribute('onclick', "cartCallback()");
         button.innerHTML = 'Add to Cart';
         li.appendChild(button)
 
         shadow.append(style, li);
+    }
+
+    setCartCallback(callback) {
+        this.cartCallback = callback;
     }
 }
 
